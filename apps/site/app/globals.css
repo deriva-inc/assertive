@@ -1,0 +1,3 @@
+@import "../../../packages/ui/styles/theme.css";
+@import "../../../packages/ui/styles/utilities.css";
+@import "tailwindcss";
