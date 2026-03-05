@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 firebase-debug.log*
 firebase-debug.*.log*
+.DS_Store
 
 # Firebase cache
 .firebase/
@@ -43,6 +44,7 @@ coverage
 bower_components
 
 # node-waf configuration
+tsconfig.tsbuildinfo
 .lock-wscript
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
@@ -56,6 +58,10 @@ node_modules/
 
 # Optional eslint cache
 .eslintcache
+
+# Build Output Files
+.rollup.cache/
+dist/
 
 # Optional REPL history
 .node_repl_history
@@ -79,8 +85,6 @@ node_modules/
 
 #VSCode Settings
 .vscode
-
-.turbo
 
 # Next - Production Files
 .next

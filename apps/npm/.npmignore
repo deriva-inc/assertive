@@ -1,0 +1,8 @@
+# Node Modules
+node_modules/
+
+# Cache directories
+.rollup.cache/
+
+# Config files
+.vscode

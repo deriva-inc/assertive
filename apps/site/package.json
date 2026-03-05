@@ -1,7 +1,7 @@
 {
-    "name": "assertive-webapp",
+    "name": "assertive-website",
     "version": "0.72.0",
-    "description": "Website for the elementa icon library.",
+    "description": "Web app for the elementa icon library.",
     "homepage": "https://assertive.deriva.xyz",
     "main": "index.js",
     "scripts": {

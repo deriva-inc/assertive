@@ -1,0 +1,22 @@
+# Ignore artifacts:
+build
+dist
+coverage
+.next
+.turbo
+
+# Ignore vendored files:
+node_modules
+
+# Ignore lockfiles:
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# YAML Files
+*.yml
+*.yaml
+
+# Ignore CSS and SASS files.
+**/*.css
+**/*.scss

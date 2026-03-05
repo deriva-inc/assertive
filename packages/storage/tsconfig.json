@@ -1,5 +1,5 @@
 {
-    "extends": "@repo/typescript-config/npm.json",
+    "extends": "@repo/typescript-config/nodejs.json",
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
@@ -7,5 +7,5 @@
         }
     },
     "include": ["src"],
-    "exclude": ["node_modules", "dist", "**/*.stories.tsx", "**/*.test.tsx"]
+    "exclude": ["node_modules", "dist"]
 }
