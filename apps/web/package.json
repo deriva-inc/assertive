@@ -1,28 +1,43 @@
 {
-  "name": "web",
-  "version": "0.1.0",
-  "type": "module",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --port 3000",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint --max-warnings 0",
-    "check-types": "next typegen && tsc --noEmit"
-  },
-  "dependencies": {
-    "@repo/ui": "workspace:*",
-    "next": "16.1.5",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
-  },
-  "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "@types/node": "^22.15.3",
-    "@types/react": "19.2.2",
-    "@types/react-dom": "19.2.2",
-    "eslint": "^9.39.1",
-    "typescript": "5.9.2"
-  }
+    "name": "assertive-webapp",
+    "version": "0.72.0",
+    "description": "Website for the elementa icon library.",
+    "homepage": "https://assertive.deriva.xyz",
+    "main": "index.js",
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "coverage": "jest --coverage",
+        "lint": "eslint .",
+        "check-types": "tsc --noEmit"
+    },
+    "keywords": [],
+    "author": "Aayush Goyal",
+    "license": "ISC",
+    "dependencies": {
+        "assertive-ui": "workspace:*",
+        "next": "catalog:",
+        "react": "catalog:",
+        "react-dom": "catalog:",
+        "firebase": "^10.12.1",
+        "zustand": "catalog:"
+    },
+    "devDependencies": {
+        "@repo/eslint-config": "workspace:*",
+        "@repo/typescript-config": "workspace:*",
+        "@tailwindcss/postcss": "^4.2.1",
+        "@types/node": "^20.12.2",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "eslint": "^9.0.0",
+        "postcss": "catalog:",
+        "tailwindcss": "catalog:",
+        "typescript": "catalog:"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "yarn run prettier-format && yarn run lint"
+        }
+    }
 }

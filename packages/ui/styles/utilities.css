@@ -1,0 +1,15 @@
+@tailwind utilities;
+
+@layer utilities{ 
+  .font-heading {
+    font-family: var(--font-fraunces);
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
