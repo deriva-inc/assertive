@@ -8,6 +8,7 @@ import { serve } from '@hono/node-server';
 import dotenv from 'dotenv';
 
 // Import routers.
+import usersRouter from '@/src/routes/users';
 
 // Import models.
 // Entities.
@@ -16,7 +17,6 @@ import dotenv from 'dotenv';
 
 // Import utilities.
 import { logger } from '@repo/core';
-import usersRouter from './routes/users';
 
 // Import DB.
 

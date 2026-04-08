@@ -1,7 +1,6 @@
 {
     "extends": "@repo/typescript-config/npm.json",
     "compilerOptions": {
-        "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"]
         }
