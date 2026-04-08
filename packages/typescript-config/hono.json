@@ -1,12 +1,8 @@
 {
     "extends": "./base.json",
     "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "@/*": ["./src/*"]
-        },
         "lib": ["esnext"],
-        "module": "NodeNext",
+        "module": "ESNext",
         "moduleResolution": "bundler",
         "target": "ES2022",
         "outDir": "dist",

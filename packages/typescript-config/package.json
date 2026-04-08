@@ -9,7 +9,7 @@
     "files": [
         "base.json",
         "nextjs.json",
-        "nodejs.json",
+        "hono.json",
         "npm.json",
         "react-library.json"
     ]
