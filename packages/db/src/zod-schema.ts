@@ -21,7 +21,7 @@ import {
     testRuns,
     tags,
     testCasesTags
-} from '@repo/db/src/schema';
+} from '@/schema';
 
 // Enums
 export const SYNC_STATE_ENUM = z.enum(syncStateEnum.enumValues);

@@ -9,9 +9,9 @@ catalogs:
     '@electric-sql/pglite':
       specifier: ^0.4.4
       version: 0.4.4
-    '@neondatabase/serverless':
-      specifier: ^1.0.2
-      version: 1.0.2
+    '@types/pg':
+      specifier: ^8.20.0
+      version: 8.20.0
     drizzle-orm:
       specifier: ^0.45.1
       version: 0.45.1
@@ -21,6 +21,9 @@ catalogs:
     next:
       specifier: ^16.1.6
       version: 16.1.6
+    pg:
+      specifier: ^8.20.0
+      version: 8.20.0
     postcss:
       specifier: ^8.5.8
       version: 8.5.8
@@ -96,9 +99,6 @@ importers:
       '@hono/node-server':
         specifier: ^1.19.11
         version: 1.19.11(hono@4.12.7)
-      '@neondatabase/serverless':
-        specifier: 'catalog:'
-        version: 1.0.2
       body-parser:
         specifier: ^1.20.2
         version: 1.20.4
@@ -113,7 +113,7 @@ importers:
         version: 4.2.0
       drizzle-orm:
         specifier: 'catalog:'
-        version: 0.45.1(@electric-sql/pglite@0.4.4)(@libsql/client@0.17.0)(@neondatabase/serverless@1.0.2)(@types/pg@8.18.0)(pg@8.20.0)
+        version: 0.45.1(@electric-sql/pglite@0.4.4)(@libsql/client@0.17.0)(@neondatabase/serverless@1.0.2)(@types/pg@8.20.0)(pg@8.20.0)
       hono:
         specifier: ^4.12.7
         version: 4.12.7
@@ -126,6 +126,9 @@ importers:
       node-cron:
         specifier: ^3.0.3
         version: 3.0.3
+      pg:
+        specifier: 'catalog:'
+        version: 8.20.0
       swagger-jsdoc:
         specifier: ^6.2.8
         version: 6.2.8(openapi-types@12.1.3)
@@ -160,6 +163,9 @@ importers:
       '@types/node-cron':
         specifier: ^3.0.11
         version: 3.0.11
+      '@types/pg':
+        specifier: 'catalog:'
+        version: 8.20.0
       '@types/supertest':
         specifier: ^6.0.2
         version: 6.0.3
@@ -400,15 +406,9 @@ importers:
 
   packages/core:
     dependencies:
-      '@repo/db':
-        specifier: workspace:*
-        version: link:../db
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
-      drizzle-zod:
-        specifier: 'catalog:'
-        version: 0.8.3(drizzle-orm@0.45.1(@electric-sql/pglite@0.4.4)(@libsql/client@0.17.0)(@neondatabase/serverless@1.0.2)(@types/pg@8.18.0)(pg@8.20.0))(zod@4.3.6)
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -422,9 +422,6 @@ importers:
       '@electric-sql/pglite':
         specifier: 'catalog:'
         version: 0.4.4
-      '@neondatabase/serverless':
-        specifier: 'catalog:'
-        version: 1.0.2
       '@repo/core':
         specifier: workspace:*
         version: link:../core
@@ -433,14 +430,29 @@ importers:
         version: link:../typescript-config
       drizzle-orm:
         specifier: 'catalog:'
-        version: 0.45.1(@electric-sql/pglite@0.4.4)(@libsql/client@0.17.0)(@neondatabase/serverless@1.0.2)(@types/pg@8.18.0)(pg@8.20.0)
+        version: 0.45.1(@electric-sql/pglite@0.4.4)(@libsql/client@0.17.0)(@neondatabase/serverless@1.0.2)(@types/pg@8.20.0)(pg@8.20.0)
+      drizzle-zod:
+        specifier: 'catalog:'
+        version: 0.8.3(drizzle-orm@0.45.1(@electric-sql/pglite@0.4.4)(@libsql/client@0.17.0)(@neondatabase/serverless@1.0.2)(@types/pg@8.20.0)(pg@8.20.0))(zod@4.3.6)
+      pg:
+        specifier: 'catalog:'
+        version: 8.20.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
     devDependencies:
+      '@types/pg':
+        specifier: 'catalog:'
+        version: 8.20.0
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.6.1
       drizzle-kit:
         specifier: ^0.31.9
         version: 0.31.9
+      zod:
+        specifier: ^4.3.6
+        version: 4.3.6
 
   packages/eslint-config:
     dependencies:
@@ -3365,6 +3377,9 @@ packages:
 
   '@types/pg@8.18.0':
     resolution: {integrity: sha512-gT+oueVQkqnj6ajGJXblFR4iavIXWsGAFCk3dP4Kki5+a9R4NMt0JARdk6s8cUKcfUoqP5dAtDSLU8xYUTFV+Q==}
+
+  '@types/pg@8.20.0':
+    resolution: {integrity: sha512-bEPFOaMAHTEP1EzpvHTbmwR8UsFyHSKsRisLIHVMXnpNefSbGA1bD6CVy+qKjGSqmZqNqBDV2azOBo8TgkcVow==}
 
   '@types/prop-types@15.7.15':
     resolution: {integrity: sha512-F6bEyamV9jKGAFBEmlQnesRPGOQqS2+Uwi0Em15xenOxHaf2hv6L8YCVn3rPdPJOiJfPiCnLIRyvwVaqMY3MIw==}
@@ -9052,6 +9067,7 @@ snapshots:
     dependencies:
       '@types/node': 22.19.15
       '@types/pg': 8.18.0
+    optional: true
 
   '@next/env@16.1.6': {}
 
@@ -10363,8 +10379,16 @@ snapshots:
   '@types/node@22.19.15':
     dependencies:
       undici-types: 6.21.0
+    optional: true
 
   '@types/pg@8.18.0':
+    dependencies:
+      '@types/node': 20.19.33
+      pg-protocol: 1.13.0
+      pg-types: 2.2.0
+    optional: true
+
+  '@types/pg@8.20.0':
     dependencies:
       '@types/node': 20.19.33
       pg-protocol: 1.13.0
@@ -11416,17 +11440,17 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.45.1(@electric-sql/pglite@0.4.4)(@libsql/client@0.17.0)(@neondatabase/serverless@1.0.2)(@types/pg@8.18.0)(pg@8.20.0):
+  drizzle-orm@0.45.1(@electric-sql/pglite@0.4.4)(@libsql/client@0.17.0)(@neondatabase/serverless@1.0.2)(@types/pg@8.20.0)(pg@8.20.0):
     optionalDependencies:
       '@electric-sql/pglite': 0.4.4
       '@libsql/client': 0.17.0
       '@neondatabase/serverless': 1.0.2
-      '@types/pg': 8.18.0
+      '@types/pg': 8.20.0
       pg: 8.20.0
 
-  drizzle-zod@0.8.3(drizzle-orm@0.45.1(@electric-sql/pglite@0.4.4)(@libsql/client@0.17.0)(@neondatabase/serverless@1.0.2)(@types/pg@8.18.0)(pg@8.20.0))(zod@4.3.6):
+  drizzle-zod@0.8.3(drizzle-orm@0.45.1(@electric-sql/pglite@0.4.4)(@libsql/client@0.17.0)(@neondatabase/serverless@1.0.2)(@types/pg@8.20.0)(pg@8.20.0))(zod@4.3.6):
     dependencies:
-      drizzle-orm: 0.45.1(@electric-sql/pglite@0.4.4)(@libsql/client@0.17.0)(@neondatabase/serverless@1.0.2)(@types/pg@8.18.0)(pg@8.20.0)
+      drizzle-orm: 0.45.1(@electric-sql/pglite@0.4.4)(@libsql/client@0.17.0)(@neondatabase/serverless@1.0.2)(@types/pg@8.20.0)(pg@8.20.0)
       zod: 4.3.6
 
   dunder-proto@1.0.1:
@@ -13888,15 +13912,13 @@ snapshots:
   pg-cloudflare@1.3.0:
     optional: true
 
-  pg-connection-string@2.12.0:
-    optional: true
+  pg-connection-string@2.12.0: {}
 
   pg-int8@1.0.1: {}
 
   pg-pool@3.13.0(pg@8.20.0):
     dependencies:
       pg: 8.20.0
-    optional: true
 
   pg-protocol@1.13.0: {}
 
@@ -13917,12 +13939,10 @@ snapshots:
       pgpass: 1.0.5
     optionalDependencies:
       pg-cloudflare: 1.3.0
-    optional: true
 
   pgpass@1.0.5:
     dependencies:
       split2: 4.2.0
-    optional: true
 
   picocolors@1.1.1: {}
 
@@ -14758,8 +14778,7 @@ snapshots:
 
   space-separated-tokens@2.0.2: {}
 
-  split2@4.2.0:
-    optional: true
+  split2@4.2.0: {}
 
   sprintf-js@1.0.3: {}
 

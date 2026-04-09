@@ -1,4 +1,9 @@
 # CHANGELOG
+### [0.9.0] - 2026-04-09
+---
+#### Updated
+- Update SQL migration to `pg` from `@neonserverless`.
+
 ### [0.8.0] - 2026-04-09
 ---
 #### Added

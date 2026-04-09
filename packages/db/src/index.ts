@@ -1,17 +1,22 @@
-import { drizzle } from 'drizzle-orm/neon-http';
-import { neon } from '@neondatabase/serverless';
+import * as dotenv from 'dotenv';
+import path from 'path';
+import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
+import { Pool } from 'pg';
+
 import { PGlite } from '@electric-sql/pglite';
-import { drizzle as drizzlePGLite } from 'drizzle-orm/pglite';
+import { drizzle as drizzlePGLite, PgliteDatabase } from 'drizzle-orm/pglite';
 
 import * as schema from '@/schema';
 import { logger } from '@repo/core';
+
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
 /**
  * This function creates a PGLite client for local development when DATABASE_URL is not set.
  *
  * @returns A Drizzle client instance connected to a local PGLite database.
  */
-function createPGLiteClient(): ReturnType<typeof drizzlePGLite> {
+function createPGLiteClient(): PgliteDatabase<typeof schema> {
     const pgliteClient = new PGlite('./local.db');
     logger.info('🪶 Using PGLite as the database driver.');
     return drizzlePGLite(pgliteClient, { schema, casing: 'camelCase' });
@@ -20,13 +25,18 @@ function createPGLiteClient(): ReturnType<typeof drizzlePGLite> {
 /**
  * This function creates a Neon client for remote PostgreSQL databases.
  *
- * @param url - The connection URL for the remote PostgreSQL database.
+ * @param connectionString - The connection URL for the remote PostgreSQL database.
  * @returns A Drizzle client instance connected to the remote PostgreSQL database.
  */
-function createRemoteDBClient(url: string): ReturnType<typeof drizzle> {
-    const sql = neon(url);
-    logger.info('🐘 Using remote PostgreSQL as the database driver.');
-    return drizzle(sql, { schema, casing: 'camelCase' });
+function createRemoteDBClient(
+    connectionString: string
+): NodePgDatabase<typeof schema> {
+    const pool = new Pool({ connectionString });
+    logger.info('DATABASE URL: ', connectionString);
+    logger.info('🐘 Using node-postgres driver for PostgreSQL database.');
+    // The standard 'node-postgres' driver does not support the 'casing' option.
+    // We use the `relations()` API and schema design to handle camelCase naming.
+    return drizzle(pool, { schema });
 }
 
 /**
@@ -36,7 +46,7 @@ function createRemoteDBClient(url: string): ReturnType<typeof drizzle> {
  *
  * This allows developers to seamlessly switch between local and remote databases without changing any code.
  */
-const db: ReturnType<typeof drizzle> | ReturnType<typeof drizzlePGLite> =
+const db: NodePgDatabase<typeof schema> | PgliteDatabase<typeof schema> =
     process.env.DATABASE_URL
         ? createRemoteDBClient(process.env.DATABASE_URL)
         : createPGLiteClient();

@@ -20,7 +20,7 @@ import {
     TestRunSchema,
     TagSchema,
     TestCaseTagSchema
-} from '@/src/schema';
+} from '@/zod-schema';
 // !SECTION: Imports
 
 // SECTION: Types

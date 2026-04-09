@@ -5,13 +5,17 @@
     "private": true,
     "dependencies": {
         "@electric-sql/pglite": "catalog:",
-        "@neondatabase/serverless": "catalog:",
         "@repo/core": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "drizzle-orm": "catalog:",
+        "drizzle-zod": "catalog:",
+        "pg": "catalog:",
         "typescript": "catalog:"
     },
     "devDependencies": {
-        "drizzle-kit": "^0.31.9"
+        "@types/pg": "catalog:",
+        "dotenv": "^16.4.5",
+        "drizzle-kit": "^0.31.9",
+        "zod": "^4.3.6"
     }
 }

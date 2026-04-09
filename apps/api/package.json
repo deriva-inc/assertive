@@ -11,13 +11,12 @@
         "check-types": "tsc --noEmit",
         "test": "jest",
         "test:coverage": "jest --coverage --detectOpenHandles",
-        "db:generate": "drizzle-kit generate:pg",
+        "db:generate": "drizzle-kit generate",
         "db:migrate": "tsx src/db/migrate.ts"
     },
     "dependencies": {
         "@electric-sql/pglite": "catalog:",
         "@hono/node-server": "^1.19.11",
-        "@neondatabase/serverless": "catalog:",
         "body-parser": "^1.20.2",
         "chalk": "^5.3.0",
         "cors": "^2.8.5",
@@ -27,6 +26,7 @@
         "jsonwebtoken": "^9.0.2",
         "lodash-es": "^4.17.21",
         "node-cron": "^3.0.3",
+        "pg": "catalog:",
         "swagger-jsdoc": "^6.2.8",
         "swagger-ui-express": "^5.0.1"
     },
@@ -40,6 +40,7 @@
         "@types/lodash-es": "^4.17.12",
         "@types/node": "^20.12.2",
         "@types/node-cron": "^3.0.11",
+        "@types/pg": "catalog:",
         "@types/supertest": "^6.0.2",
         "@types/swagger-jsdoc": "^6.0.4",
         "@types/swagger-ui-express": "^4.1.6",
