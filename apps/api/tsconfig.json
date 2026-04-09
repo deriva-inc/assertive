@@ -2,7 +2,7 @@
     "extends": "@repo/typescript-config/hono.json",
     "compilerOptions": {
         "paths": {
-            "@/*": ["./*"]
+            "@/*": ["./src/*"]
         },
         "rootDir": "./src"
     },

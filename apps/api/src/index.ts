@@ -1,3 +1,13 @@
+// Import environment variables.
+import dotenv from 'dotenv';
+
+import { runMigrations } from '@/db/migrate';
+
+// Run migrations on startup.
+(async () => {
+    await runMigrations();
+})();
+
 // Import global from third party libraries.
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
@@ -5,10 +15,9 @@ import { logger as honoLogger } from 'hono/logger';
 import { serve } from '@hono/node-server';
 
 // Import CRON jobs.
-import dotenv from 'dotenv';
 
 // Import routers.
-import usersRouter from '@/src/routes/users';
+import usersRouter from '@/routes/users';
 
 // Import models.
 // Entities.

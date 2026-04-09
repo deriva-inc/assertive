@@ -1,4 +1,9 @@
 # CHANGELOG
+### [0.8.0] - 2026-04-09
+---
+#### Added
+- Run SQL migrations on server start-up.
+
 ### [0.7.0] - 2026-04-09
 ---
 #### Added
