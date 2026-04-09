@@ -1,4 +1,33 @@
 # CHANGELOG
+### [0.9.0] - 2026-04-09
+---
+#### Updated
+- Update SQL migration to `pg` from `@neonserverless`.
+
+### [0.8.0] - 2026-04-09
+---
+#### Added
+- Run SQL migrations on server start-up.
+
+### [0.7.0] - 2026-04-09
+---
+#### Added
+- Implement and export PostgreSQL DB instance using drizzle.
+
+### [0.6.0] - 2026-04-09
+---
+#### Added
+- Implement drizzle schema based on DB schema.
+
+### [0.5.0] - 2026-04-08
+---
+#### Added
+- Add Hono support to serve backend APIs and server.
+
+#### Deleted
+- Remove Express.js support.
+- Remove redundant dependencies from `apps/api` package.
+
 ### [0.4.0] - 2026-04-08
 ---
 #### Added

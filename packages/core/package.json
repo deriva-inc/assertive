@@ -4,10 +4,13 @@
     "type": "module",
     "private": true,
     "exports": {
-        ".": "./index.ts"
+        ".": "./src/index.ts"
     },
     "dependencies": {
         "@repo/typescript-config": "workspace:*",
         "typescript": "catalog:"
+    },
+    "devDependencies": {
+        "zod": "^4.3.6"
     }
 }
