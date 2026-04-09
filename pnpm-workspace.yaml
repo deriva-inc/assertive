@@ -4,6 +4,7 @@ packages:
 
 catalog:
   "@electric-sql/pglite": "^0.4.4"
+  "@neondatabase/serverless": "^1.0.2"
   drizzle-orm: "^0.45.1"
   drizzle-zod: "^0.8.3"
   next: "^16.1.6"

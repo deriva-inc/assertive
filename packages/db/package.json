@@ -4,7 +4,14 @@
     "type": "module",
     "private": true,
     "dependencies": {
+        "@electric-sql/pglite": "catalog:",
+        "@neondatabase/serverless": "catalog:",
+        "@repo/core": "workspace:*",
         "@repo/typescript-config": "workspace:*",
+        "drizzle-orm": "catalog:",
         "typescript": "catalog:"
+    },
+    "devDependencies": {
+        "drizzle-kit": "^0.31.9"
     }
 }

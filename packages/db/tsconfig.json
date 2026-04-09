@@ -1,11 +1,11 @@
 {
-    "extends": "@repo/typescript-config/nodejs.json",
+    "extends": "@repo/typescript-config/npm.json",
     "compilerOptions": {
-        "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"]
-        }
+        },
+        "rootDir": "./src"
     },
-    "include": ["src", "index.ts"],
+    "include": ["src"],
     "exclude": ["node_modules", "dist"]
 }

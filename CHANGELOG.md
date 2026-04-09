@@ -1,4 +1,9 @@
 # CHANGELOG
+### [0.7.0] - 2026-04-09
+---
+#### Added
+- Implement and export PostgreSQL DB instance using drizzle.
+
 ### [0.6.0] - 2026-04-09
 ---
 #### Added
