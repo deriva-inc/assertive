@@ -8,6 +8,11 @@
     },
     "dependencies": {
         "@repo/typescript-config": "workspace:*",
+        "@repo/db": "workspace:*",
+        "drizzle-zod": "catalog:",
         "typescript": "catalog:"
+    },
+    "devDependencies": {
+        "zod": "^4.3.6"
     }
 }

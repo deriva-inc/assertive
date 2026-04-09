@@ -1,4 +1,18 @@
 # CHANGELOG
+### [0.6.0] - 2026-04-09
+---
+#### Added
+- Implement drizzle schema based on DB schema.
+
+### [0.5.0] - 2026-04-08
+---
+#### Added
+- Add Hono support to serve backend APIs and server.
+
+#### Deleted
+- Remove Express.js support.
+- Remove redundant dependencies from `apps/api` package.
+
 ### [0.4.0] - 2026-04-08
 ---
 #### Added

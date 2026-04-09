@@ -3,7 +3,9 @@ packages:
   - "packages/*"
 
 catalog:
+  "@electric-sql/pglite": "^0.4.4"
   drizzle-orm: "^0.45.1"
+  drizzle-zod: "^0.8.3"
   next: "^16.1.6"
   postcss: "^8.5.8"
   react: "^19.2.0"
