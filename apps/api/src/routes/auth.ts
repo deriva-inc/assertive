@@ -35,6 +35,11 @@ const generateTokens = async (
         exp: Math.floor(Date.now() / 1000) + 60 * 60 // Expires in 1 hour
     };
     const secret = process.env.JWT_ACCESS_SECRET;
+    if (!secret) {
+        throw new Error(
+            'JWT_ACCESS_SECRET is not defined in environment variables.'
+        );
+    }
     const jwtToken = await sign(payload, secret);
 
     // Generate Refresh Token (long-lived, opaque)
@@ -123,13 +128,29 @@ authRouter.post(
             return c.json(
                 {
                     message: 'User registration successful',
-                    data: { user: createdUser, accessToken }
+                    data: {
+                        user: {
+                            id: createdUser.id,
+                            name: createdUser.name,
+                            email: createdUser.email,
+                            avatarUrl: createdUser.avatarUrl,
+                            createdAt: createdUser.createdAt,
+                            updatedAt: createdUser.updatedAt
+                        },
+                        accessToken
+                    }
                 },
                 201
             );
         } catch (error: any) {
             logger.error('Registration error:', error.toString());
-            return c.json({ error: 'An unexpected error occurred.' }, 500);
+            return c.json(
+                {
+                    error: 'An unexpected error occurred.',
+                    data: error.toString()
+                },
+                500
+            );
         }
     }
 );
@@ -199,7 +220,13 @@ authRouter.post(
             });
         } catch (error: any) {
             logger.error('Login error:', error.toString());
-            return c.json({ error: 'An unexpected error occurred.' }, 500);
+            return c.json(
+                {
+                    error: 'An unexpected error occurred.',
+                    data: error.toString()
+                },
+                500
+            );
         }
     }
 );
@@ -271,8 +298,17 @@ authRouter.post('/refresh', async (c) => {
         }
 
         // If valid, generate a new set of tokens (Token Rotation)
-        const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
-            await generateTokens(user.id, user.email);
+        const {
+            accessToken: newAccessToken,
+            refreshToken: newRefreshToken,
+            hashedRefreshToken
+        } = await generateTokens(user.id, user.email);
+
+        // Store the new hashed refresh token in the database, replacing the old one.
+        await db
+            .update(users)
+            .set({ refreshToken: hashedRefreshToken })
+            .where(eq(users.id, user.id));
 
         // Send the new refresh token in a new httpOnly cookie
         setCookie(c, 'rt', newRefreshToken as string, {
@@ -289,7 +325,13 @@ authRouter.post('/refresh', async (c) => {
     } catch (error: any) {
         // This catches errors from JWT verification (e.g., malformed token) or DB issues.
         logger.error('Refresh token error:', error.toString());
-        return c.json({ error: 'Invalid token or server error.' }, 403);
+        return c.json(
+            {
+                error: 'Invalid token or server error.',
+                data: error.toString()
+            },
+            403
+        );
     }
 });
 
