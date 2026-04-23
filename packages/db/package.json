@@ -3,6 +3,9 @@
     "version": "0.1.0",
     "type": "module",
     "private": true,
+    "exports": {
+        ".": "./src/index.ts"
+    },
     "dependencies": {
         "@electric-sql/pglite": "catalog:",
         "@repo/core": "workspace:*",

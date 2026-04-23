@@ -62,11 +62,12 @@ export const triggerTypeEnum = pgEnum('trigger_type_enum', [
 /*
  * SECTION: `users` table - Represents a user account (local or team member)
  */
-export const users = pgTable('projects', {
+export const users = pgTable('users', {
     id: uuid('id').primaryKey().defaultRandom(),
     email: text('email').notNull().unique(),
     name: text('name').notNull(),
-    passwordHash: text('password_hash'),
+    passwordHash: text('password_hash').notNull(),
+    refreshToken: text('refresh_token'),
     avatarUrl: text('avatar_url'),
     createdAt: timestamp('created_at', { withTimezone: true })
         .notNull()
@@ -87,7 +88,10 @@ export const organizations = pgTable(
         name: text('name').notNull(),
         slug: text('slug').notNull().unique(),
         logoUrl: text('logo_url'),
-        defaultIdPrefix: text('default_id_prefix').notNull().default('TST'),
+        defaultIdPrefix: text('default_id_prefix')
+            .notNull()
+            .default('TST')
+            .unique(),
         createdBy: uuid('created_by')
             .notNull()
             .references(() => users.id, {
