@@ -17,6 +17,7 @@ import { serve } from '@hono/node-server';
 // Import CRON jobs.
 
 // Import routers.
+import authRouter from '@/routes/auth';
 import usersRouter from '@/routes/users';
 
 // Import models.
@@ -80,6 +81,7 @@ app.get('/api/v1/health', (c) => {
 /*
  * API Routes
  */
+app.route('/api/v1/auth', authRouter);
 app.route('/api/v1/users', usersRouter);
 
 /*

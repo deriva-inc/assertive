@@ -1,4 +1,17 @@
 # CHANGELOG
+### [0.11.0] - 2026-04-23
+---
+#### Added
+- Add Auth service API endpoints to:
+    - `/api/v1/auth/register` - Register a new user.
+    - `/api/v1/auth/login` - Login a new user.
+    - `/api/v1/auth/refresh` - Get a new refresh token for a user.
+
+### [0.10.0] - 2026-04-23
+---
+#### Updated
+- Update SQL migration to match DB schema.
+
 ### [0.9.0] - 2026-04-09
 ---
 #### Updated
