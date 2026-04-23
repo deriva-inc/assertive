@@ -1,5 +1,5 @@
 {
-  "id": "fb3c3251-7907-4222-a89c-afd435ca13ff",
+  "id": "865969ff-8d56-400b-a1a9-932c65eeef5f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -95,10 +95,10 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "org_members_user_id_projects_id_fk": {
-          "name": "org_members_user_id_projects_id_fk",
+        "org_members_user_id_users_id_fk": {
+          "name": "org_members_user_id_users_id_fk",
           "tableFrom": "org_members",
-          "tableTo": "projects",
+          "tableTo": "users",
           "columnsFrom": [
             "user_id"
           ],
@@ -108,10 +108,10 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "org_members_invited_by_projects_id_fk": {
-          "name": "org_members_invited_by_projects_id_fk",
+        "org_members_invited_by_users_id_fk": {
+          "name": "org_members_invited_by_users_id_fk",
           "tableFrom": "org_members",
-          "tableTo": "projects",
+          "tableTo": "users",
           "columnsFrom": [
             "invited_by"
           ],
@@ -212,10 +212,10 @@
         }
       },
       "foreignKeys": {
-        "organizations_created_by_projects_id_fk": {
-          "name": "organizations_created_by_projects_id_fk",
+        "organizations_created_by_users_id_fk": {
+          "name": "organizations_created_by_users_id_fk",
           "tableFrom": "organizations",
-          "tableTo": "projects",
+          "tableTo": "users",
           "columnsFrom": [
             "created_by"
           ],
@@ -234,6 +234,13 @@
           "columns": [
             "slug"
           ]
+        },
+        "organizations_default_id_prefix_unique": {
+          "name": "organizations_default_id_prefix_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "default_id_prefix"
+          ]
         }
       },
       "policies": {},
@@ -251,9 +258,9 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
-        "email": {
-          "name": "email",
-          "type": "text",
+        "org_id": {
+          "name": "org_id",
+          "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
@@ -263,17 +270,30 @@
           "primaryKey": false,
           "notNull": true
         },
-        "password_hash": {
-          "name": "password_hash",
+        "description": {
+          "name": "description",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "avatar_url": {
-          "name": "avatar_url",
+        "repository_url": {
+          "name": "repository_url",
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "id_prefix": {
+          "name": "id_prefix",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'TST'"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",
@@ -290,18 +310,66 @@
           "default": "now()"
         }
       },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "projects_email_unique": {
-          "name": "projects_email_unique",
-          "nullsNotDistinct": false,
+      "indexes": {
+        "idx_projects_org": {
+          "name": "idx_projects_org",
           "columns": [
-            "email"
-          ]
+            {
+              "expression": "org_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
+      "foreignKeys": {
+        "projects_org_id_organizations_id_fk": {
+          "name": "projects_org_id_organizations_id_fk",
+          "tableFrom": "projects",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "org_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "projects_id_prefix_organizations_default_id_prefix_fk": {
+          "name": "projects_id_prefix_organizations_default_id_prefix_fk",
+          "tableFrom": "projects",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "id_prefix"
+          ],
+          "columnsTo": [
+            "default_id_prefix"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "projects_created_by_users_id_fk": {
+          "name": "projects_created_by_users_id_fk",
+          "tableFrom": "projects",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -843,10 +911,10 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "test_cases_owner_projects_id_fk": {
-          "name": "test_cases_owner_projects_id_fk",
+        "test_cases_owner_users_id_fk": {
+          "name": "test_cases_owner_users_id_fk",
           "tableFrom": "test_cases",
-          "tableTo": "projects",
+          "tableTo": "users",
           "columnsFrom": [
             "owner"
           ],
@@ -1215,10 +1283,10 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "test_runs_overridden_by_projects_id_fk": {
-          "name": "test_runs_overridden_by_projects_id_fk",
+        "test_runs_overridden_by_users_id_fk": {
+          "name": "test_runs_overridden_by_users_id_fk",
           "tableFrom": "test_runs",
-          "tableTo": "projects",
+          "tableTo": "users",
           "columnsFrom": [
             "overridden_by"
           ],
@@ -1313,6 +1381,78 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password_hash": {
+          "name": "password_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "refresh_token": {
+          "name": "refresh_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "avatar_url": {
+          "name": "avatar_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false

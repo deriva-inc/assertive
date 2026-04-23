@@ -6,7 +6,7 @@ import { Pool } from 'pg';
 import { PGlite } from '@electric-sql/pglite';
 import { drizzle as drizzlePGLite, PgliteDatabase } from 'drizzle-orm/pglite';
 
-import * as schema from '@/schema';
+import * as schema from './schema';
 import { logger } from '@repo/core';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env') });
@@ -51,4 +51,26 @@ const db: NodePgDatabase<typeof schema> | PgliteDatabase<typeof schema> =
         ? createRemoteDBClient(process.env.DATABASE_URL)
         : createPGLiteClient();
 
-export default db;
+export { db };
+
+export {
+    // Enums
+    syncStateEnum,
+    testStatusEnum,
+    testTypeEnum,
+    priorityEnum,
+    orgRoleEnum,
+    historyActionEnum,
+    triggerTypeEnum,
+    // Tables
+    users,
+    organizations,
+    orgMembers,
+    projects,
+    testSuites,
+    testCases,
+    runBatches,
+    testRuns,
+    tags,
+    testCasesTags
+} from './schema';
